@@ -1,0 +1,64 @@
+package com.example.demo;
+
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+public class HomeController {
+
+    @GetMapping("/songform")
+    public String loadFormPage(Model model){
+        model.addAttribute("song", new Song());
+        return "songform";
+    }
+
+    @PostMapping("/songform")
+    public String loadFromPage(@ModelAttribute Song song,
+                               Model model)  {
+        model.addAttribute("song", song);
+        return "confirmsong";
+        
+        
+        
+        
+        
+        
+        
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action="#" th:action="@{/songform}" th:object="${song}"
+      method="post">
+    Name: <input type="text" th:field="*{name}" /><br />
+    Artist: <input type="text" th:field="*{artist}" /><br />
+    Album: <input type="text" th:field="*{album}" /><br />
+    Rating: <input type="text" th:field="*{rating}" /><br />
+    Year: <input type="text" th:field="*{year}" /><br />
+    <input type="submit" value="Submit" />
+</form>
+</body>
+</html>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p th:inline="text">The song name was [[${song.name}]}.<br />
+The artist name is [[${song.artist}]].<br />
+    The album name is [[${song.album}]].<br />
+The rating name is [[${song.rating}]] and the year it came out on was [[${song.year}]].</p>
+</body>
+</html>
